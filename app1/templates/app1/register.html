@@ -1,0 +1,58 @@
+{%extends "app1/master.html"%}
+{%block vasat%}
+{%load static%}
+
+</nav>
+<h1 class="font-weight-normal">فرم ثبت نام </h1>
+</div> <!-- .container -->
+</div> <!-- .banner-section -->
+</div> <!-- .page-banner -->
+
+<div class="page-section">
+<div class="container">
+<h1 class="text-center wow fadeInUp">ثبت نام</h1>
+
+<form class="contact-form mt-5" method="post">
+  {% csrf_token %}
+<div class="row mb-3">
+<div class="col-sm-6 py-2 wow fadeInLeft">
+  <label for="fullName">Name</label>
+  <input type="text" name="name" id="name" class="form-control" placeholder="نام و نام خانوادگی">
+</div>
+<div class="col-sm-6 py-2 wow fadeInRight">
+  <label for="emailAddress">Email</label>
+  <input type="text" name="email" id="email" class="form-control" placeholder="ایمیل">
+</div>
+<div class="col-12 py-2 wow fadeInUp">
+  <label for="subject">Subject</label>
+  <input type="text" name="subject" id="subject" class="form-control" placeholder="موضوع">
+</div>
+
+<div class="col-12 py-2 wow fadeInUp">
+  <label for="message">Message</label>
+  <input type="text" name="message" id="message" class="form-control" rows="8" placeholder="لطفاً تخصص، آدرس و سایر اطلاعات خود جهت نمایش در سایت را در این قسمت وارد کنید">
+</div>
+</div>
+<button type="button" class="btn btn-primary wow zoomIn" onclick="payam()"> ثبت و ارسال</button>
+</form>
+<script>
+  function payam(){
+    var n=document.getElementById("name").value;
+    var e=document.getElementById("email").value;
+    var s=document.getElementById("subject").value;
+    var m=document.getElementById("message").value;
+    var t=document.getElementsByName("csrfmiddlewaretoken")[0].value;
+    $.ajax({
+type:"POST",
+data:{name:n,email:e,subject:s,message:m,csrfmiddlewaretoken:t},
+url:'/',
+success:function(res){
+        alert(res)
+      }
+    })
+    }
+   
+</script>
+</div>
+</div>
+{%endblock%}
